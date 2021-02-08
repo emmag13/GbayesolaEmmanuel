@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000F65</color>
+    <color name="colorPrimaryDark">#A6000F65</color>
+    <color name="colorAccent">#5C000F65</color>
+
+    <color name="textColor">#40404D</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="dim_gray">#696969</color>
+    <color name="black">#F000</color>
+    <color name="light_gray">#9C9B9B</color>
+    <color name="gray">#131313</color>
+    <color name="black_text">#3D3B3B</color>
+    <color name="back_color">#F0ECEC</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#E44F56</color>
+    <color name="blue">#000F65</color>
+
+
+    <color name="grey_10">#e6e6e6</color>
+
+    <color name="background">#dddddd</color>
+
+    <integer-array name="androidcolors">
+        <item>@color/color1</item>
+        <item>@color/color2</item>
+        <item>@color/color3</item>
+        <item>@color/color4</item>
+        <item>@color/color5</item>
+        <item>@color/color6</item>
+        <item>@color/color7</item>
+        <item>@color/color8</item>
+        <item>@color/color9</item>
+
+    </integer-array>
+
+    <color name="color1">#E8C6DE</color>
+    <color name="color2">#E8C3C9</color>
+    <color name="color3">#C0E3D8</color>
+    <color name="color4">#D2C3E7</color>
+    <color name="color5">#C5E7CF</color>
+    <color name="color6">#EBE4C8</color>
+    <color name="color7">#EBC8C8</color>
+    <color name="color8">#CCE5EF</color>
+    <color name="color9">#EADCC7</color>
+</resources>
