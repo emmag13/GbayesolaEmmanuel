@@ -1,4 +1,4 @@
-package com.ehealth4everyone.gbayesolaemmanueloluwaseyi
+package com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -9,11 +9,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.FiltersActivity.UIStateViewModel.UIState.DATA_FOUND
-import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.FiltersActivity.UIStateViewModel.UIState.DEFAULT
-import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.FiltersActivity.UIStateViewModel.UIState.FAILED
-import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.FiltersActivity.UIStateViewModel.UIState.LOADING
-import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.FiltersActivity.UIStateViewModel.UIState.NO_DATA
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.R
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity.FiltersActivity.UIStateViewModel.UIState.DATA_FOUND
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity.FiltersActivity.UIStateViewModel.UIState.DEFAULT
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity.FiltersActivity.UIStateViewModel.UIState.FAILED
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity.FiltersActivity.UIStateViewModel.UIState.LOADING
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity.FiltersActivity.UIStateViewModel.UIState.NO_DATA
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.adapter.FiltersRecyclerAdapter
 import com.ehealth4everyone.restapi.GbayesolaEmmanuelCloud
 import com.ehealth4everyone.restapi.models.FilterLists
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.filter_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class FiltersActivity : AppCompatActivity() {
     var filtersAdapter: FiltersRecyclerAdapter? = null

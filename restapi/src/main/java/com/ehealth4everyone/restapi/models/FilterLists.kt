@@ -12,6 +12,6 @@ class FilterLists {
     var endYear = 0
 
     var gender: String? = null
-    val countries: ArrayList<String>? = null
-    val colors: ArrayList<String>? = null
+    var countries: ArrayList<String>? = null
+    var colors: ArrayList<String>? = null
 }

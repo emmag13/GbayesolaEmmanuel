@@ -18,9 +18,9 @@
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".CarOwnersActivity" />
+        <activity android:name=".activity.CarOwnersActivity" />
 
-        <activity android:name=".FiltersActivity">
+        <activity android:name=".activity.FiltersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

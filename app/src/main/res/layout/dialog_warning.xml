@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
-    tools:context=".CarOwnersActivity"
+    tools:context=".activity.CarOwnersActivity"
     android:orientation="vertical">
 
     <LinearLayout

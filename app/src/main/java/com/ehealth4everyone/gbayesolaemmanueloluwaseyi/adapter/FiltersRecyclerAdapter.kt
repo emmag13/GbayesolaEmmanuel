@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.CarOwnersActivity
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity.CarOwnersActivity
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.R
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.interfaces.ItemClickListener
 import com.ehealth4everyone.restapi.models.FilterLists

@@ -1,4 +1,4 @@
-package com.ehealth4everyone.gbayesolaemmanueloluwaseyi;
+package com.ehealth4everyone.gbayesolaemmanueloluwaseyi.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -10,22 +10,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.R;
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.adapter.CarOwnersArrayAdapter;
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.util.CSVFile;
-import com.ehealth4everyone.restapi.utils.UriUtils;
 
 import java.io.File;
 import java.io.InputStream;
@@ -39,15 +35,12 @@ public class CarOwnersActivity extends Activity {
     public static final String INTENT_START_YEAR = "start_year";
     public static final String INTENT_END_YEAR = "end_year";
 
-    Uri documents;
-
     ImageView backArrow;
 
-
     final int SELECT_DOCUMENT = 50;
-    final String TAG = "CarOwnersActivity";
 
-    String gender, startYear, endYear;
+    String gender;
+    int startYear, endYear;
     ArrayList countries, color;
 
 
@@ -64,8 +57,8 @@ public class CarOwnersActivity extends Activity {
         Intent intent = getIntent();
 
         gender = intent.getStringExtra(INTENT_GENDER);
-        startYear = intent.getStringExtra(INTENT_START_YEAR);
-        endYear = intent.getStringExtra(INTENT_END_YEAR);
+        startYear = intent.getIntExtra(INTENT_START_YEAR, -1);
+        endYear = intent.getIntExtra(INTENT_END_YEAR, -1);
         countries = intent.getStringArrayListExtra(INTENT_COUNTRIES);
         color = intent.getStringArrayListExtra(INTENT_COLORS);
 
@@ -80,10 +73,7 @@ public class CarOwnersActivity extends Activity {
         listView.setNestedScrollingEnabled(true);
         listView.onRestoreInstanceState(state);
 
-
-        filterCarOwners();
-
-
+        filterCarOwners(readCSVFile());
     }
 
     public void handlePermission() {
@@ -104,36 +94,34 @@ public class CarOwnersActivity extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == SELECT_DOCUMENT) {
+            filterCarOwners(readCSVFile());
             for (int i = 0; i < permissions.length; i++) {
-                String permission = permissions[i];
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                    final Dialog dialog = new Dialog(this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.dialog_warning);
+                    dialog.setCancelable(false);
+
+                    WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                    lp.copyFrom(dialog.getWindow().getAttributes());
+                    lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                    lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+
+                    dialog.findViewById(R.id.bt_close).setOnClickListener(v -> {
+                        dialog.dismiss();
+                        onBackPressed();
+                    });
+
+                    dialog.show();
+                    dialog.getWindow().setAttributes(lp);
                 }
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        if (requestCode == SELECT_DOCUMENT) {
-            if (resultCode == RESULT_OK) {
-                // Get the url from data
-                Uri documentUri = data.getData();
-                this.documents = documentUri;
-                if (null != documentUri) {
-                    // Get the path from the Uri
-                    final String path = UriUtils.getPathFromUri(getApplicationContext(), documents);
-
-                    Log.i(TAG, "Document Path : " + path);
-                    //documents.add(documentUri);
-                    Log.d(TAG, "Added a Document");
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
-
-    public void filterCarOwners() {
+    public List<String[]> readCSVFile() {
         try {
             File csvfile = new File(Environment.getExternalStorageDirectory() + "/ehealth" + "/car_ownsers_data.csv");
             if (!csvfile.exists()) {
@@ -158,30 +146,44 @@ public class CarOwnersActivity extends Activity {
             }
             InputStream inputStream = getContentResolver().openInputStream(Uri.fromFile(csvfile));
             CSVFile csvFile = new CSVFile(inputStream);
-            List<String[]> carOwnersList = csvFile.read();
+            return csvFile.read();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-            for (String[] carOwnersData : carOwnersList) {
+
+    public List<String[]> filterCarOwners(List<String[]> param) {
+        List<String[]> result = new ArrayList<>();
+        try {
+            for (String[] carOwnersData : param) {
                 if (carOwnersData[8].equalsIgnoreCase(gender)) {
                     carOwnersArrayAdapter.add(carOwnersData);
+                    result.add(carOwnersData);
                 }
 
-                if (carOwnersData[6].equalsIgnoreCase(startYear)) {
+                if (carOwnersData[6].equalsIgnoreCase(String.valueOf(startYear))) {
                     carOwnersArrayAdapter.add(carOwnersData);
+                    result.add(carOwnersData);
                 }
 
-                if (carOwnersData[6].equalsIgnoreCase(endYear)) {
+                if (carOwnersData[6].equalsIgnoreCase(String.valueOf(endYear))) {
                     carOwnersArrayAdapter.add(carOwnersData);
+                    result.add(carOwnersData);
                 }
 
                 for (int i = 0; i < countries.size(); i++) {
                     if (countries.get(i).toString().equalsIgnoreCase(carOwnersData[4])) {
                         carOwnersArrayAdapter.add(carOwnersData);
+                        result.add(carOwnersData);
                     }
                 }
 
                 for (int i = 0; i < color.size(); i++) {
                     if (color.get(i).toString().equalsIgnoreCase(carOwnersData[7])) {
                         carOwnersArrayAdapter.add(carOwnersData);
+                        result.add(carOwnersData);
                     }
                 }
             }
@@ -189,5 +191,6 @@ public class CarOwnersActivity extends Activity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
 }

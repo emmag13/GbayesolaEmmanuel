@@ -56,6 +56,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.3.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    //Mockito framework( use this mockito. It is preferred because it supports suspend functions)
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-rc01'
 

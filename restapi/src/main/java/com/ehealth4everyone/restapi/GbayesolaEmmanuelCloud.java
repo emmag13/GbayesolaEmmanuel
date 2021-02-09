@@ -23,7 +23,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * UserDetails
+ * eHealth4Everyone Test
  * <p>
  * Singleton Class.
  *
@@ -41,7 +41,7 @@ public class GbayesolaEmmanuelCloud {
 
 
     /**
-     * Private UserDetails constructor.
+     * Private eHealth4Everyone Test constructor.
      *
      * @param context Application Context.
      */
@@ -50,22 +50,18 @@ public class GbayesolaEmmanuelCloud {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .cache(new Cache(context.getCacheDir(), 10 * 1024 * 1024))
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        Request request = chain.request();
-                        if (hasNetwork(context))
-                            request = request.newBuilder().header("Cache-Control", "public, max-age=" + 60).build();
-                        else
-                            request = request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build();
-                        return chain.proceed(request);
-                    }
+                .addInterceptor(chain -> {
+                    Request request = chain.request();
+                    if (hasNetwork(context))
+                        request = request.newBuilder().header("Cache-Control", "public, max-age=" + 60).build();
+                    else
+                        request = request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build();
+                    return chain.proceed(request);
                 })
                 .build();
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.readTimeout(60, TimeUnit.SECONDS);
-        // httpClient.writeTimeout(60, TimeUnit.SECONDS);
         if (BuildConfig.DEBUG) {
             // Intercept and Log Response Body in Debug Mode.
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -91,15 +87,11 @@ public class GbayesolaEmmanuelCloud {
         return isConnected;
     }
 
-    public GbayesolaEmmanuelAPI getApiService() {
-        return apiService;
-    }
-
     /**
      * Singleton Get instance method
      *
      * @param context Application Context.
-     * @return UserDetails Instance.
+     * @return eHealth4Everyone Test  Instance.
      */
     public static GbayesolaEmmanuelCloud getInstance(Context context) {
         if (instance == null) {
@@ -113,7 +105,7 @@ public class GbayesolaEmmanuelCloud {
     }
 
     /**
-     * Get all users details.
+     * Get all filter list.
      *
      * @param ID    App ID.
      * @param callback Retrofit Callback.
