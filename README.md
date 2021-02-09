@@ -16,7 +16,7 @@ Min API level is set to [`21`](https://android-arsenal.com/api?level=21), so the
 popular libraries and tools of the Android ecosystem. Most of the libraries are in the stable version unless there is a
 good reason to use non-stable dependency.
 
-## Caching and Offline
+Caching/Offline
 
 ## Getting started
 
