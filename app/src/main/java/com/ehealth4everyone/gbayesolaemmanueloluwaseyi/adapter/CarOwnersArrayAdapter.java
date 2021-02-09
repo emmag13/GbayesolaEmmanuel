@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +28,8 @@ public class CarOwnersArrayAdapter extends ArrayAdapter<String[]> {
 
 
     static class ItemViewHolder {
-        TextView fullName, email;
-        ImageView view;
+        TextView fullName, email, name;
+        RelativeLayout view;
     }
 
     public CarOwnersArrayAdapter(Context context, int textViewResourceId) {
@@ -61,9 +62,10 @@ public class CarOwnersArrayAdapter extends ArrayAdapter<String[]> {
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.car_owners_item, parent, false);
             viewHolder = new ItemViewHolder();
-            viewHolder.fullName = (TextView) row.findViewById(R.id.fullName);
-            viewHolder.email = (TextView) row.findViewById(R.id.email);
-            viewHolder.view = (ImageView) row.findViewById(R.id.view);
+            viewHolder.fullName = row.findViewById(R.id.fullName);
+            viewHolder.email = row.findViewById(R.id.email);
+            viewHolder.name = row.findViewById(R.id.name);
+            viewHolder.view = row.findViewById(R.id.userDetailCard);
             row.setTag(viewHolder);
         } else {
             viewHolder = (ItemViewHolder) row.getTag();
@@ -71,6 +73,7 @@ public class CarOwnersArrayAdapter extends ArrayAdapter<String[]> {
         String[] stat = getItem(position);
         viewHolder.fullName.setText(stat[1] + " " + stat[2]);
         viewHolder.email.setText(stat[3]);
+        viewHolder.name.setText(stat[1].charAt(0) + "" + stat[2].charAt(0));
 
 
         viewHolder.view.setOnClickListener(v -> {
@@ -87,9 +90,11 @@ public class CarOwnersArrayAdapter extends ArrayAdapter<String[]> {
             TextView jobTitle = modelBottom.findViewById(R.id.job_title);
             TextView bio = modelBottom.findViewById(R.id.bio);
             TextView gender = modelBottom.findViewById(R.id.Gender);
+            TextView name = modelBottom.findViewById(R.id.name);
             CardView email = modelBottom.findViewById(R.id.email);
 
             fullName.setText(stat[1] + " " + stat[2]);
+            name.setText(stat[1].charAt(0) + "" + stat[2].charAt(0));
             country.setText(stat[4]);
             jobTitle.setText(stat[9]);
             bio.setText(stat[10]);

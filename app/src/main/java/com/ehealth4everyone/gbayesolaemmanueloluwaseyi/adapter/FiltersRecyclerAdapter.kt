@@ -61,14 +61,10 @@ class FiltersRecyclerAdapter(private val context: Context, filterLists: List<Fil
                 override fun onClick(v: View?) {
                     val intent = Intent(context, CarOwnersActivity::class.java)
                     intent.putExtra(CarOwnersActivity.INTENT_GENDER, filterLists!![position].gender)
-                    intent.putStringArrayListExtra(
-                        CarOwnersActivity.INTENT_COUNTRIES,
-                        filterLists!![position].countries
-                    )
-                    intent.putStringArrayListExtra(
-                        CarOwnersActivity.INTENT_COLORS,
-                        filterLists!![position].colors
-                    )
+                    intent.putExtra(CarOwnersActivity.INTENT_START_YEAR, filterLists!![position].startYear)
+                    intent.putExtra(CarOwnersActivity.INTENT_END_YEAR, filterLists!![position].endYear)
+                    intent.putStringArrayListExtra(CarOwnersActivity.INTENT_COUNTRIES, filterLists!![position].countries)
+                    intent.putStringArrayListExtra(CarOwnersActivity.INTENT_COLORS, filterLists!![position].colors)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     context.startActivity(intent)
                 }

@@ -33,7 +33,7 @@
             android:layout_height="1dp"
             android:layout_below="@id/dateRange"
             android:layout_marginBottom="4dp"
-            android:background="#707070" />
+            android:background="#EBC6C5C5" />
 
 
         <LinearLayout

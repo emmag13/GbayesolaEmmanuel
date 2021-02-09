@@ -1,14 +1,10 @@
 package com.ehealth4everyone.gbayesolaemmanueloluwaseyi.adapter
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.R
 import com.ehealth4everyone.gbayesolaemmanueloluwaseyi.interfaces.ItemClickListener
-import de.hdodenhof.circleimageview.CircleImageView
 
 class FiltersViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
